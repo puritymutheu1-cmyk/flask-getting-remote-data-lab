@@ -1,13 +1,12 @@
-import requests
-import json
+from flask import Flask, request, jsonify  # type: ignore[import]
+from flask_restful import Resource  # type: ignore[import]
+from flask_cors import CORS  # type: ignore[import]
+import requests  # type: ignore[import]
 
-class GetRequester:
+app = Flask(__name__)
+CORS(app)
 
-    def __init__(self, url):
-        self.url = url
+@app.route("/")
+def index():
+    return jsonify({"message": "Hello from GetRequester"})
 
-    def get_response_body(self):
-        pass
-
-    def load_json(self):
-        pass
