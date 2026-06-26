@@ -38,3 +38,19 @@ def get_employees():
             "status": "error",
             "message": f"Failed to fetch employee data: {str(e)}"
         }), 500
+
+@app.route("/employees/raw")
+def get_employees_raw():
+    try:
+        requester = GetRequester(GetRequester.EMPLOYEE_ENDPOINT)
+        raw_data = requester.get_res_body()
+        return raw_data, 200, {'Content-Type': 'application/json'}
+    except requests.exceptions.RequestException as e:
+        return jsonify({
+            "status": "error",
+            "message": f"Failed to fetch employee data: {str(e)}"
+        }), 500
+    
+if __name__ == "__main__":
+    # Development only!
+    app.run(debug=True, port=5000)
